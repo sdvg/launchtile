@@ -1,28 +1,36 @@
 module.exports = {
   root: true,
+  parserOptions: {
+    parser: `babel-eslint`,
+  },
   env: {
-    node: true
+    browser: true,
   },
   extends: [
-    'plugin:vue/essential',
-    '@vue/standard'
+    `plugin:vue/recommended`,
+    `standard`,
   ],
-  parserOptions: {
-    parser: 'babel-eslint'
-  },
+  plugins: [
+    `vue`,
+  ],
   rules: {
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off'
+    'generator-star-spacing': `off`,
+    'no-debugger': process.env.NODE_ENV === `production` ? `error` : `off`,
+    quotes: [`error`, `backtick`],
+    'object-curly-spacing': [`error`, `always`],
+    'comma-dangle': [`error`, `always-multiline`],
+    'vue/script-indent': [`error`, 2, { baseIndent: 1 }],
+    'vue/attribute-hyphenation': [`error`, `never`],
   },
   overrides: [
     {
-      files: [
-        '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)'
-      ],
-      env: {
-        jest: true
-      }
-    }
-  ]
+      files: [`*.vue`],
+      rules: {
+        indent: `off`,
+      },
+    },
+  ],
+  globals: {
+    browser: true,
+  },
 }
