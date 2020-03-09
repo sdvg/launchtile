@@ -4,7 +4,11 @@
   "homepage_url": "http://localhost:8080/",
   "description": "A Vue Browser Extension",
   "default_locale": "en",
-  "permissions": [],
+  "permissions": [
+    "<all_urls>",
+    "bookmarks",
+    "tabs"
+  ],
   "icons": {
     "16": "icons/16.png",
     "48": "icons/48.png",
@@ -26,6 +30,16 @@
   },
   "options_ui": {
     "page": "options.html",
-    "browser_style": true
+    "chrome_style": true
+  },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "windows": "Ctrl+E",
+        "mac": "Command+E",
+        "chromeos": "Ctrl+E",
+        "linux": "Ctrl+E"
+      }
+    }
   }
 }
