@@ -80,6 +80,7 @@
         placeholder="Search…"
         autofocus
         @input="queryChanged"
+        spellcheck="false"
       >
     </div>
 
