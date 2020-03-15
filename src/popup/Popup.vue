@@ -106,7 +106,12 @@
           target="_blank"
           @click.prevent="openResult(result)"
         >
-          {{ result.title }}
+          <template v-if="result.title">
+            {{ result.title }}
+          </template>
+          <i v-else>
+            {{ result.url }}
+          </i>
         </a>
       </li>
     </ol>
