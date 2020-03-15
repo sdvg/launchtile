@@ -1,6 +1,8 @@
 <script>
   import shortcuts from '@/mixins/shortcuts'
 
+  const MAX_RESULTS = 10
+
   export default {
     mixins: [shortcuts],
     data () {
@@ -9,6 +11,14 @@
         focusedIndex: null,
         results: [],
       }
+    },
+    computed: {
+      visibleResults () {
+        const maxOffset = this.results.length - MAX_RESULTS
+        const scrollingOffset = this.focusedIndex < MAX_RESULTS ? 0 : Math.min(this.focusedIndex - MAX_RESULTS + 1, maxOffset)
+
+        return this.results.slice(scrollingOffset, scrollingOffset + MAX_RESULTS)
+      },
     },
     created () {
       this.fetchRecentBookmarks()
@@ -79,8 +89,8 @@
         :class="$style.queryInput"
         placeholder="Search…"
         autofocus
-        @input="queryChanged"
         spellcheck="false"
+        @input="queryChanged"
       >
     </div>
 
@@ -94,6 +104,7 @@
     <ol v-if="results.length">
       <li
         v-for="(result, index) in results"
+        v-if="visibleResults.includes(result)"
         :key="result.id"
         @mouseover="focusedIndex = index"
       >
