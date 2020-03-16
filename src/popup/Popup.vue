@@ -161,7 +161,8 @@
   .resultItem {
     display: block;
     width: 100%;
-    padding: 8px 10px;
+    padding: 10px;
+    line-height: 1;
     text-decoration: none;
     color: #b4b4b4;
     font-size: 14px;
