@@ -1,9 +1,13 @@
 <script>
+  import IconCog from '@/icons/IconCog'
   import shortcuts from '@/mixins/shortcuts'
 
   const MAX_RESULTS = 10
 
   export default {
+    components: {
+      IconCog,
+    },
     mixins: [shortcuts],
     data () {
       return {
@@ -43,8 +47,11 @@
       openFocusedResult () {
         this.openResult(this.results[this.focusedIndex])
       },
+      isUrlBookmarklet (url) {
+        return url.startsWith(`javascript:`)
+      },
       openResult ({ url }) {
-        if (url.startsWith(`javascript:`)) {
+        if (this.isUrlBookmarklet(url)) {
           browser.tabs.executeScript(null, { code: url.replace(/^javascript:/, ``) })
           window.close()
         } else {
@@ -118,8 +125,13 @@
           target="_blank"
           @click.prevent="openResult(result)"
         >
+          <IconCog
+            v-if="isUrlBookmarklet(result.url)"
+            :class="$style.faviconAction"
+          />
           <img
-            :class="$style.favicon"
+            v-else
+            :class="$style.faviconBookmark"
             :src="`chrome://favicon/size/16@2x/${result.url}`"
             alt=""
           >
@@ -186,5 +198,15 @@
   .favicon {
     width: 20px;
     margin-right: 8px;
+  }
+
+  .faviconBookmark {
+    composes: favicon;
+  }
+
+  .faviconAction {
+    composes: favicon;
+
+    fill: #fff;
   }
 </style>
