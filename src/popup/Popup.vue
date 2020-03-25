@@ -118,6 +118,12 @@
           target="_blank"
           @click.prevent="openResult(result)"
         >
+          <img
+            :class="$style.favicon"
+            :src="`chrome://favicon/size/16@2x/${result.url}`"
+            alt=""
+          >
+
           <template v-if="result.title">
             {{ result.title }}
           </template>
@@ -159,7 +165,8 @@
   }
 
   .resultItem {
-    display: block;
+    display: flex;
+    align-items: center;
     width: 100%;
     padding: 10px;
     line-height: 1;
@@ -174,5 +181,10 @@
   .resultItem.isActive {
     background: hsla(340, 82%, 40%, 1);
     color: #d6d6d6;
+  }
+
+  .favicon {
+    width: 20px;
+    margin-right: 8px;
   }
 </style>
