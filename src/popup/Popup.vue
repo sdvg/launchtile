@@ -136,12 +136,14 @@
             alt=""
           >
 
-          <template v-if="result.title">
-            {{ result.title }}
-          </template>
-          <i v-else>
-            {{ result.url }}
-          </i>
+          <div :class="$style.resultLabel">
+            <template v-if="result.title">
+              {{ result.title }}
+            </template>
+            <i v-else>
+              {{ result.url }}
+            </i>
+          </div>
         </a>
       </li>
     </ol>
@@ -185,14 +187,17 @@
     text-decoration: none;
     color: #b4b4b4;
     font-size: 14px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
   }
 
   .resultItem.isActive {
     background: hsla(340, 82%, 40%, 1);
     color: #d6d6d6;
+  }
+
+  .resultLabel {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .favicon {
