@@ -1,5 +1,5 @@
 {
-  "name": "quick-access",
+  "name": "@sdvg/launchtile",
   "version": "0.1.0",
   "private": true,
   "scripts": {

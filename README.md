@@ -1,4 +1,4 @@
-# quick-access
+# LaunchTile
 
 ## Project setup
 ```
