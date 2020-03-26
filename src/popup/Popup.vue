@@ -183,7 +183,6 @@
     align-items: center;
     width: 100%;
     padding: 10px;
-    line-height: 1;
     text-decoration: none;
     color: #b4b4b4;
     font-size: 14px;
