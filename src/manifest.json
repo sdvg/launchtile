@@ -6,7 +6,6 @@
   "permissions": [
     "activeTab",
     "bookmarks",
-    "tabs",
     "chrome://favicon/"
   ],
   "content_security_policy": "script-src 'self'; object-src 'self'; img-src chrome://favicon;",
