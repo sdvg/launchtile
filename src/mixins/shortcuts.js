@@ -1,4 +1,5 @@
-import { find, without } from 'lodash'
+import find from 'lodash/find'
+import without from 'lodash/without'
 
 const KEYMAP = {
   enter: 13,
