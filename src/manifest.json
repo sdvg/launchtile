@@ -24,10 +24,10 @@
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {
-        "windows": "Ctrl+E",
+        "windows": "Ctrl+Shift+E",
         "mac": "Command+E",
-        "chromeos": "Ctrl+E",
-        "linux": "Ctrl+E"
+        "chromeos": "Ctrl+Shift+E",
+        "linux": "Ctrl+Shift+E"
       }
     }
   }
