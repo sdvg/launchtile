@@ -156,12 +156,12 @@
   }
 
   .queryContainer {
-    border-bottom: 1px solid #b4b4b4;
+    border-bottom: 1px solid var(--color-text-main);
   }
 
   .queryInput {
     display: block;
-    background: #0c0c0c;
+    background: var(--color-background-stronger);
     color: inherit;
     width: 100%;
     border: 2px solid transparent;
@@ -184,13 +184,13 @@
     width: 100%;
     padding: 10px;
     text-decoration: none;
-    color: #b4b4b4;
+    color: var(--color-text-main);
     font-size: 14px;
   }
 
   .resultItem.isActive {
-    background: hsla(340, 82%, 40%, 1);
-    color: #d6d6d6;
+    background: var(--color-accent);
+    color: var(--color-text-stronger);
   }
 
   .resultLabel {
@@ -211,6 +211,6 @@
   .faviconAction {
     composes: favicon;
 
-    fill: #fff;
+    fill: var(--color-bookmarklet-icon);
   }
 </style>

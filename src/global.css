@@ -1,6 +1,15 @@
+:root {
+  --color-background-main: #242424;
+  --color-background-stronger: #0c0c0c;
+  --color-text-main: #b4b4b4;
+  --color-text-stronger: #d6d6d6;
+  --color-accent: #ba124a;
+  --color-bookmarklet-icon: #fff;
+}
+
 html {
-  background: #242424;
-  color: #b4b4b4;
+  background: var(--color-background-main);
+  color: var(--color-text-main);
   box-sizing: border-box;
 }
 
