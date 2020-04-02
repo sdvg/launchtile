@@ -7,6 +7,17 @@
   --color-bookmarklet-icon: #fff;
 }
 
+@media(prefers-color-scheme: light) {
+  :root {
+    --color-background-main: #e1e1e1;
+    --color-background-stronger: #fff;
+    --color-text-main: #0f0f0f;
+    --color-text-stronger: #e1e1e1;
+    --color-accent: #ba124a;
+    --color-bookmarklet-icon: #0f0f0f;
+  }
+}
+
 html {
   background: var(--color-background-main);
   color: var(--color-text-main);
