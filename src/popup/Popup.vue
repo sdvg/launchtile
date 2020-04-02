@@ -77,9 +77,6 @@
       enter () {
         this.openFocusedResult()
       },
-      space () {
-        this.openFocusedResult()
-      },
       esc () {
         window.close()
       },
