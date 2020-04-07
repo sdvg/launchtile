@@ -220,7 +220,7 @@
   }
 
   .resultList {
-    height: calc(maximumResultsInViewport * resultItemHeight);
+    max-height: calc(maximumResultsInViewport * resultItemHeight);
     overflow: auto;
   }
 
