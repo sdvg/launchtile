@@ -2,8 +2,6 @@
   import IconCog from '@/icons/IconCog'
   import shortcuts from '@/mixins/shortcuts'
 
-  const MAX_RESULTS = 10
-
   export default {
     components: {
       IconCog,
@@ -14,14 +12,18 @@
         query: ``,
         focusedIndex: null,
         results: [],
+        isResultItemMouseOverBlocked: false,
       }
     },
     computed: {
-      visibleResults () {
-        const maxOffset = this.results.length - MAX_RESULTS
-        const scrollingOffset = this.focusedIndex < MAX_RESULTS ? 0 : Math.min(this.focusedIndex - MAX_RESULTS + 1, maxOffset)
-
-        return this.results.slice(scrollingOffset, scrollingOffset + MAX_RESULTS)
+      maximumResultsInViewport () {
+        return parseInt(this.$style.maximumResultsInViewport)
+      },
+      resultItemHeight () {
+        return parseInt(this.$style.resultItemHeight)
+      },
+      viewportHeight () {
+        return this.maximumResultsInViewport * this.resultItemHeight
       },
     },
     created () {
@@ -58,20 +60,52 @@
           browser.tabs.create({ url })
         }
       },
+      resultItemMouseOver (index) {
+        if (!this.isResultItemMouseOverBlocked) {
+          this.focusedIndex = index
+        }
+      },
+      blockResultItemMouseOver () {
+        /* Prevent resting cursor from interfering with keyboard navigation */
+        this.isResultItemMouseOverBlocked = true
+      },
+      unblockResultItemMouseOver () {
+        this.isResultItemMouseOverBlocked = false
+      },
     },
     shortcuts: {
       down () {
+        this.blockResultItemMouseOver()
+
         if (this.focusedIndex === null || this.focusedIndex === this.results.length - 1) {
           this.focusedIndex = 0
+          this.$refs.resultList.scrollTop = 0
         } else {
           this.focusedIndex = this.focusedIndex + 1
+
+          const focusedItemOffset = this.focusedIndex * this.resultItemHeight
+          const isFocusedItemOutOfViewport = focusedItemOffset + this.resultItemHeight > this.viewportHeight + this.$refs.resultList.scrollTop
+
+          if (isFocusedItemOutOfViewport) {
+            this.$refs.resultList.scrollTop = (this.focusedIndex + 1 - this.maximumResultsInViewport) * this.resultItemHeight
+          }
         }
       },
       up () {
+        this.blockResultItemMouseOver()
+
         if (this.focusedIndex === null || this.focusedIndex === 0) {
           this.focusedIndex = this.results.length - 1
+          this.$refs.resultList.scrollTop = (this.results.length - this.maximumResultsInViewport) * this.resultItemHeight // scroll to bottom
         } else {
           this.focusedIndex = this.focusedIndex - 1
+
+          const focusedItemOffset = this.focusedIndex * this.resultItemHeight
+          const isFocusedItemOutOfViewport = focusedItemOffset < this.$refs.resultList.scrollTop
+
+          if (isFocusedItemOutOfViewport) {
+            this.$refs.resultList.scrollTop = focusedItemOffset
+          }
         }
       },
       enter () {
@@ -85,7 +119,10 @@
 </script>
 
 <template>
-  <div>
+  <div
+    @mousemove="unblockResultItemMouseOver"
+    @mousedown="unblockResultItemMouseOver"
+  >
     <div :class="$style.queryContainer">
       <input
         v-model="query"
@@ -105,12 +142,16 @@
       No results
     </p>
 
-    <ol v-if="results.length">
+    <ol
+      v-if="results.length"
+      ref="resultList"
+      :class="$style.resultList"
+    >
       <li
         v-for="(result, index) in results"
-        v-if="visibleResults.includes(result)"
         :key="result.id"
-        @mouseover="focusedIndex = index"
+        :ref="`resultListItem${index}`"
+        @mouseover="resultItemMouseOver(index)"
       >
         <a
           :href="result.url"
@@ -148,6 +189,9 @@
 </template>
 
 <style module>
+  @value resultItemHeight: 40px;
+  @value maximumResultsInViewport: 10;
+
   html {
     width: 400px;
   }
@@ -173,6 +217,11 @@
     text-align: center;
     padding: 12px;
     font-size: 16px;
+  }
+
+  .resultList {
+    height: calc(maximumResultsInViewport * resultItemHeight);
+    overflow: auto;
   }
 
   .resultItem {
