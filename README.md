@@ -1,29 +1,14 @@
-# LaunchTile
+# LaunchTile <img src="media/logo.svg" width="64" height="64" valign="center">
 
-## Project setup
-```
-npm install
-```
+<div align="center"><img src="media/screenshot-640x400.png" width="310" alt="Screenshot of LaunchTile"></div>
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+Browser extension to swiftly search and open bookmarks.
 
-### Compiles and minifies for production
-```
-npm run build
-```
+* Open the LaunchTile window with Strg+Shift+E (⌘+E on MacOS) and start searching
+* Results can be navigated using the keyboard (arrow keys + enter)
+* Bookmarklets are detected as such and run in the context of the currently open tab
+* Initially, without search query, the most recently created bookmarks are shown
 
-### Run your unit tests
-```
-npm run test:unit
-```
+To change the hotkey go to chrome://extensions/shortcuts and look for LaunchTile.
 
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+[Chrome Web Store](https://chrome.google.com/webstore/detail/launchtile/jmcdhjepahpchldnembnbejniokgbbln)
