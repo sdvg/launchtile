@@ -33,10 +33,14 @@
       New snippet
     </button>
 
-    <ol :class="$style.snippets">
+    <ol
+      v-if="snippets.length"
+      :class="$style.snippets"
+    >
       <li
         v-for="(snippet, snippetIndex) in snippets"
         :key="snippetIndex"
+        :class="$style.snippetContainer"
       >
         <button
           :class="[
@@ -67,7 +71,7 @@
     color: var(--color-text-stronger);
     font-size: 16px;
     font-weight: bold;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
   }
 
   @media(prefers-color-scheme: light) {
@@ -77,8 +81,8 @@
   }
 
   .newButtonIcon {
-    width: 28px;
-    height: 28px;
+    width: 22px;
+    height: 22px;
     margin-right: 6px;
     fill: currentColor;
   }
@@ -86,12 +90,16 @@
   .snippets {
     background: var(--color-background-stronger);
     overflow: auto;
+    flex-grow: 1;
+  }
+
+  .snippetContainer:not(:first-child) {
+    margin-top: 2px;
   }
 
   .snippet {
     display: block;
     width: 100%;
-    margin-bottom: 2px;
     padding: 4px 8px;
     text-align: left;
     white-space: nowrap;
