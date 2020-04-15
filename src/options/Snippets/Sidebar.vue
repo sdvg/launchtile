@@ -49,7 +49,8 @@
           ]"
           @click="$emit(`openSnippet`, snippet)"
         >
-          {{ snippet.title }}
+          <template v-if="snippet.title">{{ snippet.title }}</template>
+          <i v-else>Untitled snippet</i>
         </button>
       </li>
     </ol>
@@ -60,7 +61,7 @@
   .root {
     display: flex;
     flex-direction: column;
-    padding: 4px 4px 0;
+    padding: 0 4px;
   }
 
   .newButton {
@@ -71,7 +72,7 @@
     color: var(--color-text-stronger);
     font-size: 16px;
     font-weight: bold;
-    margin-bottom: 12px;
+    margin-bottom: 15px; /* Visually align with title input */
   }
 
   @media(prefers-color-scheme: light) {

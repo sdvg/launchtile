@@ -19,10 +19,14 @@
 
 <style module>
   .root {
-    margin: 16px;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    height: 100vh;
   }
 
   .snippets {
     margin-top: 16px;
+    flex-grow: 1;
   }
 </style>
