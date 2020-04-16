@@ -1,6 +1,7 @@
 <script>
   import IconCog from '@/icons/IconCog'
   import shortcuts from '@/mixins/shortcuts'
+  import { SNIPPETS } from '@/storageKeys'
 
   export default {
     components: {
@@ -13,6 +14,7 @@
         focusedIndex: null,
         results: [],
         isResultItemMouseOverBlocked: false,
+        snippets: [],
       }
     },
     computed: {
@@ -28,15 +30,29 @@
     },
     created () {
       this.fetchRecentBookmarks()
+      this.fetchSnippets()
     },
     methods: {
+      async fetchSnippets () {
+        const { [SNIPPETS]: snippets } = await browser.storage.local.get(SNIPPETS)
+
+        this.snippets = snippets
+      },
       async fetchRecentBookmarks () {
         this.results = await browser.bookmarks.getRecent(10)
       },
       async queryChanged () {
         if (this.query) {
-          this.results = (await browser.bookmarks.search(this.query))
+          const bookmarkResults = (await browser.bookmarks.search(this.query))
             .filter(bookmark => bookmark.url) // exclude folders
+          const snippetResults = this.snippets.filter(snippet => snippet.title.toLowerCase().includes(this.query.toLowerCase()))
+
+          this.results = [
+            ...bookmarkResults,
+            ...snippetResults,
+          ]
+          console.log(this.results)
+          // @todo sort and slice and wrap
         } else {
           this.fetchRecentBookmarks()
         }
