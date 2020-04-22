@@ -1,8 +1,14 @@
 <script>
   import Sidebar from './Sidebar'
   import Details from './Details'
-  import { SNIPPETS } from '@/storageKeys'
-  import throttle from 'lodash/throttle'
+  import { SNIPPET } from '@/storageKeys'
+  import {
+    createItem,
+    queryItemsByStorageKey,
+    updateItem,
+    removeItem,
+  } from '@/lib/storage'
+  import sortBy from 'lodash/sortBy'
 
   export default {
     components: {
@@ -15,69 +21,67 @@
         activeSnippet: null,
       }
     },
-    watch: {
-      snippets () {
-        this.throttledPersistSnippets()
-      },
-    },
     async created () {
-      const { [SNIPPETS]: snippets } = await browser.storage.local.get(SNIPPETS)
-
-      this.snippets = snippets || []
+      await this.fetchSnippets()
 
       if (this.snippets.length) {
-        this.openSnippet(this.snippets[0])
+        this.openSnippet(sortBy(this.snippets, `created`)[0])
       }
 
-      window.addEventListener(`beforeunload`, this.persistSnippets)
-
-      this.throttledPersistSnippets = throttle(this.persistSnippets, 5000)
+      browser.storage.local.onChanged.addListener(this.storageChanged)
     },
     destroyed () {
-      this.persistSnippets()
-      window.removeEventListener(`beforeunload`, this.persistSnippets)
+      browser.storage.local.onChanged.removeListener(this.storageChanged)
     },
     methods: {
-      async persistSnippets () {
+      async fetchSnippets () {
+        this.snippets = await queryItemsByStorageKey(SNIPPET) || []
+      },
+      storageChanged () {
+        this.fetchSnippets()
+      },
+      async newSnippet () {
         try {
-          await browser.storage.local.set({ [SNIPPETS]: this.snippets })
+          const newSnippet = await createItem(SNIPPET, {
+            title: `Snippet #${this.snippets.length + 1}`,
+            created: new Date().toISOString(),
+            updated: new Date().toISOString(),
+            content: ``,
+          })
+
+          this.snippets.push(newSnippet)
+          this.openSnippet(newSnippet)
         } catch (error) {
           console.error(error)
-          alert(`Error saving the snippet: ${error.message}`)
+          alert(`Error creating snippet: ${error.message}`)
         }
       },
-      newSnippet () {
-        const newSnippet = {
-          title: `Snippet #${this.snippets.length + 1}`,
-          created: new Date().toISOString(),
-          updated: new Date().toISOString(),
-          content: ``,
-        }
+      async deleteSnippet (snippet) {
+        try {
+          await removeItem(snippet.id)
 
-        this.snippets.push(newSnippet)
-        this.activeSnippet = newSnippet
-      },
-      deleteSnippet (snippet) {
-        this.snippets = this.snippets.filter(searchSnippet => searchSnippet !== snippet)
-        this.activeSnippet = null
+          this.snippets = this.snippets.filter(searchSnippet => searchSnippet.id !== snippet.id)
+          this.activeSnippet = null
+        } catch (error) {
+          console.error(error)
+          alert(`Error deleting snippet: ${error.message}`)
+        }
       },
       openSnippet (snippet) {
         this.activeSnippet = snippet
       },
-      updateSnippet (snippet) {
-        const updatedSnippet = {
+      async updateSnippet (snippet) {
+        this.activeSnippet = {
           ...snippet,
           updated: new Date().toISOString(),
         }
 
-        this.snippets = this.snippets.map(searchSnippet => {
-          if (searchSnippet === this.activeSnippet) {
-            return updatedSnippet
-          }
-          return searchSnippet
-        })
-
-        this.activeSnippet = updatedSnippet
+        try {
+          await updateItem(this.activeSnippet)
+        } catch (error) {
+          console.error(error)
+          alert(`Error saving the snippet: ${error.message}`)
+        }
       },
     },
   }

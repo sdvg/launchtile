@@ -1,1 +1,1 @@
-export const SNIPPETS = `snippets`
+export const SNIPPET = `snippet`

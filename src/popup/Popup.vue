@@ -1,7 +1,8 @@
 <script>
   import IconCog from '@/icons/IconCog'
   import shortcuts from '@/mixins/shortcuts'
-  import { SNIPPETS } from '@/storageKeys'
+  import { SNIPPET } from '@/storageKeys'
+  import { queryItemsByStorageKey } from '@/lib/storage'
   import sortBy from 'lodash/sortBy'
 
   export default {
@@ -40,9 +41,7 @@
     },
     methods: {
       async fetchSnippets () {
-        const { [SNIPPETS]: snippets } = await browser.storage.local.get(SNIPPETS)
-
-        this.snippets = snippets
+        this.snippets = await queryItemsByStorageKey(SNIPPET) || []
       },
       async fetchRecentBookmarks () {
         this.results = (await browser.bookmarks.getRecent(10))

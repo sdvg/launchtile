@@ -12,6 +12,7 @@
     "codemirror": "^5.52.2",
     "core-js": "^3.6.4",
     "date-fns": "^2.11.1",
+    "uuid": "^7.0.3",
     "vue": "^2.6.11"
   },
   "devDependencies": {

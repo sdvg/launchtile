@@ -1,4 +1,5 @@
 <script>
+  import sortBy from 'lodash/sortBy'
   import IconPlusCircle from '@/icons/IconPlusCircle'
 
   export default {
@@ -15,9 +16,14 @@
         default: null,
       },
     },
+    computed: {
+      sortedSnippets () {
+        return sortBy(this.snippets, `created`)
+      },
+    },
     methods: {
       isSnippetActive (snippet) {
-        return snippet === this.activeSnippet
+        return this.activeSnippet && this.activeSnippet.id === snippet.id
       },
     },
   }
@@ -38,7 +44,7 @@
       :class="$style.snippets"
     >
       <li
-        v-for="(snippet, snippetIndex) in snippets"
+        v-for="(snippet, snippetIndex) in sortedSnippets"
         :key="snippetIndex"
         :class="$style.snippetContainer"
       >
@@ -49,7 +55,9 @@
           ]"
           @click="$emit(`openSnippet`, snippet)"
         >
-          <template v-if="snippet.title">{{ snippet.title }}</template>
+          <template v-if="snippet.title">
+            {{ snippet.title }}
+          </template>
           <i v-else>Untitled snippet</i>
         </button>
       </li>
