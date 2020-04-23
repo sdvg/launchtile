@@ -45,6 +45,16 @@ button {
   cursor: pointer;
 }
 
+/*
+ * Hide decorations in search fields (they don't look nice on dark background in newer Chrome versions
+ * and are not really necessary)
+ * source: https://blog.maximerouiller.com/post/remove-the-x-from-internet-explorer-and-chrome-input-type-search/
+ */
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { display: none; }
+
 .visually-hidden {
   position: absolute;
   overflow: hidden;
