@@ -1,6 +1,9 @@
 <script>
   import IconCog from '@/icons/IconCog'
   import shortcuts from '@/mixins/shortcuts'
+  import { SNIPPET } from '@/storageKeys'
+  import { queryItemsByStorageKey } from '@/lib/storage'
+  import sortBy from 'lodash/sortBy'
 
   export default {
     components: {
@@ -13,6 +16,12 @@
         focusedIndex: null,
         results: [],
         isResultItemMouseOverBlocked: false,
+        snippets: [],
+        resultTypes: {
+          BOOKMARK: `bookmark`,
+          BOOKMARKLET: `bookmarklet`,
+          SNIPPET: `snippet`,
+        },
       }
     },
     computed: {
@@ -28,15 +37,54 @@
     },
     created () {
       this.fetchRecentBookmarks()
+      this.fetchSnippets()
     },
     methods: {
+      async fetchSnippets () {
+        this.snippets = await queryItemsByStorageKey(SNIPPET) || []
+      },
       async fetchRecentBookmarks () {
-        this.results = await browser.bookmarks.getRecent(10)
+        this.results = (await browser.bookmarks.getRecent(10))
+          .map(bookmark => ({
+            type: this.resultTypes.BOOKMARK,
+            title: bookmark.title,
+            bookmark,
+          }))
       },
       async queryChanged () {
         if (this.query) {
-          this.results = (await browser.bookmarks.search(this.query))
+          const bookmarksAndBookmarklets = (await browser.bookmarks.search(this.query))
             .filter(bookmark => bookmark.url) // exclude folders
+
+          const bookmarkResults = bookmarksAndBookmarklets
+            .filter(({ url }) => !this.isUrlBookmarklet(url))
+            .map(bookmark => ({
+              type: this.resultTypes.BOOKMARK,
+              title: bookmark.title,
+              bookmark,
+            }))
+
+          const bookmarkletResults = bookmarksAndBookmarklets
+            .filter(({ url }) => this.isUrlBookmarklet(url))
+            .map(bookmarklet => ({
+              type: this.resultTypes.BOOKMARKLET,
+              title: bookmarklet.title,
+              bookmarklet,
+            }))
+
+          const snippetResults = this.snippets
+            .filter(snippet => snippet.title.toLowerCase().includes(this.query.toLowerCase()))
+            .map(snippet => ({
+              type: this.resultTypes.SNIPPET,
+              title: snippet.title,
+              snippet,
+            }))
+
+          this.results = sortBy([
+            ...bookmarkResults,
+            ...bookmarkletResults,
+            ...snippetResults,
+          ], `title`)
         } else {
           this.fetchRecentBookmarks()
         }
@@ -52,12 +100,19 @@
       isUrlBookmarklet (url) {
         return url.startsWith(`javascript:`)
       },
-      openResult ({ url }) {
-        if (this.isUrlBookmarklet(url)) {
-          browser.tabs.executeScript(null, { code: url.replace(/^javascript:/, ``) })
+      openResult (result) {
+        switch (result.type) {
+        case this.resultTypes.BOOKMARK:
+          browser.tabs.create({ url: result.bookmark.url })
+          break
+        case this.resultTypes.BOOKMARKLET:
+          browser.tabs.executeScript(null, { code: result.bookmarklet.url.replace(/^javascript:/, ``) })
           window.close()
-        } else {
-          browser.tabs.create({ url })
+          break
+        case this.resultTypes.SNIPPET:
+          browser.tabs.executeScript(null, { code: result.snippet.content })
+          window.close()
+          break
         }
       },
       resultItemMouseOver (index) {
@@ -149,28 +204,26 @@
     >
       <li
         v-for="(result, index) in results"
-        :key="result.id"
+        :key="index"
         :ref="`resultListItem${index}`"
         @mouseover="resultItemMouseOver(index)"
       >
-        <a
-          :href="result.url"
-          :title="result.url"
+        <button
+          :title="result.type === resultTypes.BOOKMARK ? result.bookmark.url : result.title"
           :class="[
             $style.resultItem,
             { [$style.isActive]: index === focusedIndex },
           ]"
-          target="_blank"
-          @click.prevent="openResult(result)"
+          @click="openResult(result)"
         >
           <IconCog
-            v-if="isUrlBookmarklet(result.url)"
+            v-if="result.type === resultTypes.BOOKMARKLET || result.type === resultTypes.SNIPPET"
             :class="$style.faviconAction"
           />
           <img
             v-else
             :class="$style.faviconBookmark"
-            :src="`chrome://favicon/size/16@2x/${result.url}`"
+            :src="`chrome://favicon/size/16@2x/${result.bookmark.url}`"
             alt=""
           >
 
@@ -178,11 +231,14 @@
             <template v-if="result.title">
               {{ result.title }}
             </template>
+            <i v-else-if="result.type === resultTypes.BOOKMARK">
+              {{ result.bookmark.url }}
+            </i>
             <i v-else>
-              {{ result.url }}
+              Untitled element
             </i>
           </div>
-        </a>
+        </button>
       </li>
     </ol>
   </div>
@@ -232,6 +288,8 @@
     text-decoration: none;
     color: var(--color-text-main);
     font-size: 14px;
+    background: transparent;
+    border: none
   }
 
   .resultItem.isActive {

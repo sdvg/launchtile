@@ -3,12 +3,12 @@ module.exports = {
     popup: {
       template: `public/browser-extension.html`,
       entry: `./src/popup/main.js`,
-      title: `Popup`,
+      title: `LaunchTile - Popup`,
     },
     options: {
       template: `public/browser-extension.html`,
       entry: `./src/options/main.js`,
-      title: `Options`,
+      title: `LaunchTile - Options`,
     },
   },
   pluginOptions: {

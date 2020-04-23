@@ -6,7 +6,8 @@
   "permissions": [
     "activeTab",
     "bookmarks",
-    "chrome://favicon/"
+    "chrome://favicon/",
+    "storage"
   ],
   "content_security_policy": "script-src 'self'; object-src 'self'; img-src chrome://favicon;",
   "icons": {
@@ -21,6 +22,10 @@
       "19": "icons/19.png",
       "38": "icons/38.png"
     }
+  },
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
   },
   "commands": {
     "_execute_browser_action": {
