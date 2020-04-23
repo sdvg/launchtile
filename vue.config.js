@@ -22,4 +22,13 @@ module.exports = {
       },
     },
   },
+  configureWebpack: {
+    optimization: {
+      splitChunks: {
+        cacheGroups: {
+          vendors: false,
+        },
+      },
+    },
+  },
 }
