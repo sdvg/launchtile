@@ -188,6 +188,16 @@
         spellcheck="false"
         @input="queryChanged"
       >
+
+      <a
+        href="options.html"
+        target="_blank"
+        title="Options"
+        :class="$style.optionsLink"
+      >
+        <IconCog :class="$style.optionsLinkIcon" />
+        <span class="visually-hidden">Options</span>
+      </a>
     </div>
 
     <p
@@ -253,6 +263,7 @@
   }
 
   .queryContainer {
+    position: relative;
     border-bottom: 1px solid var(--color-text-main);
   }
 
@@ -267,6 +278,18 @@
     padding: 12px;
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
+  }
+
+  .optionsLink {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+  }
+
+  .optionsLinkIcon {
+    width: 14px;
+    height: 14px;
+    fill: var(--color-text-main);
   }
 
   .noResults {
