@@ -30,10 +30,10 @@
   "commands": {
     "_execute_browser_action": {
       "suggested_key": {
-        "windows": "Ctrl+Shift+E",
+        "windows": "Ctrl+Q",
         "mac": "Command+E",
-        "chromeos": "Ctrl+Shift+E",
-        "linux": "Ctrl+Shift+E"
+        "chromeos": "Ctrl+Q",
+        "linux": "Ctrl+Q"
       }
     }
   }
