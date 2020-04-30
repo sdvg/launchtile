@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "__MSG_extName__",
-  "description": "Open bookmarks and run bookmarklets",
+  "description": "Swiftly open bookmarks and run snippets",
   "default_locale": "en",
   "permissions": [
     "activeTab",
