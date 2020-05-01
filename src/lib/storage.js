@@ -21,7 +21,9 @@ const queryItemsByStorageKey = async storageKey => {
 }
 
 const updateItem = item => {
-  return storageApi.set({ [item.id]: item })
+  const plainItem = JSON.parse(JSON.stringify(item)) // required for Firefox storage
+
+  return storageApi.set({ [item.id]: plainItem })
 }
 
 const removeItem = id => {

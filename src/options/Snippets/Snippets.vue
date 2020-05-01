@@ -28,10 +28,10 @@
         this.openSnippet(sortBy(this.snippets, `created`)[0])
       }
 
-      browser.storage.local.onChanged.addListener(this.storageChanged)
+      browser.storage.onChanged.addListener(this.storageChanged)
     },
     destroyed () {
-      browser.storage.local.onChanged.removeListener(this.storageChanged)
+      browser.storage.onChanged.removeListener(this.storageChanged)
     },
     methods: {
       async fetchSnippets () {
