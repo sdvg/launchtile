@@ -3,7 +3,8 @@
   "version": "3.0.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service build --mode development --watch",
+    "serve:chrome": "VUE_APP_BROWSER=chrome vue-cli-service build --mode development --watch",
+    "serve:firefox": "VUE_APP_BROWSER=firefox vue-cli-service build --mode development --watch",
     "build:chrome": "VUE_APP_BROWSER=chrome vue-cli-service build",
     "build:firefox": "VUE_APP_BROWSER=firefox vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",

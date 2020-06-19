@@ -17,3 +17,26 @@ To change the hotkey go to chrome://extensions/shortcuts and look for _LaunchTil
 ## Install
 
 [Chrome Web Store](https://chrome.google.com/webstore/detail/launchtile/jmcdhjepahpchldnembnbejniokgbbln)
+
+## Build
+
+Chrome:
+
+```
+# npm install
+# npm run build:chrome
+```
+
+Firefox: 
+
+```
+# npm install
+# npm run build:firefox
+```
+
+## Development
+
+```
+# npm install
+# npm run serve:chrome # or npm run serve:firefox 
+```
