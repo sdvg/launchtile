@@ -114,7 +114,7 @@
 
   .sidebar {
     width: 230px;
-    margin-bottom: 31px; /* visually align with Details footer */
+    margin-bottom: 28px; /* visually align with Details footer */
     flex-shrink: 0;
   }
 
