@@ -111,13 +111,13 @@
           break
         case this.resultTypes.BOOKMARKLET:
           browser.tabs.executeScript(null, { code: result.bookmarklet.url.replace(/^javascript:/, ``) })
-          window.close()
           break
         case this.resultTypes.SNIPPET:
           browser.tabs.executeScript(null, { code: result.snippet.content })
-          window.close()
           break
         }
+
+        window.close()
       },
       resultItemMouseOver (index) {
         if (!this.isResultItemMouseOverBlocked) {
