@@ -1,5 +1,5 @@
 const isDevelopment = process.env.NODE_ENV === `development`
-const isChrome = process.env.BROWSER === `chrome`
+const isChrome = process.env.VUE_APP_BROWSER === `chrome`
 
 module.exports = {
   pages: {

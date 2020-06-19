@@ -18,10 +18,13 @@
   }
 }
 
-html {
-  background: var(--color-background-main);
+body {
+  /* Body background color is used by Firefox for the popup arrow - actual background colors set in Popup and Options */
+  background: var(--color-background-stronger);
   color: var(--color-text-main);
   box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+  font-size: 75%;
 }
 
 *,

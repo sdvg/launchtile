@@ -3,6 +3,7 @@
   import shortcuts from '@/mixins/shortcuts'
   import { SNIPPET } from '@/storageKeys'
   import { queryItemsByStorageKey } from '@/lib/storage'
+  import { isChrome } from '@/lib/environment'
   import sortBy from 'lodash/sortBy'
 
   export default {
@@ -33,6 +34,9 @@
       },
       viewportHeight () {
         return this.maximumResultsInViewport * this.resultItemHeight
+      },
+      isChrome () {
+        return isChrome()
       },
     },
     created () {
@@ -175,6 +179,7 @@
 
 <template>
   <div
+    :class="$style.root"
     @mousemove="unblockResultItemMouseOver"
     @mousedown="unblockResultItemMouseOver"
   >
@@ -231,7 +236,7 @@
             :class="$style.faviconAction"
           />
           <img
-            v-else
+            v-else-if="isChrome"
             :class="$style.faviconBookmark"
             :src="`chrome://favicon/size/16@2x/${result.bookmark.url}`"
             alt=""
@@ -258,8 +263,12 @@
   @value resultItemHeight: 40px;
   @value maximumResultsInViewport: 10;
 
-  html {
+  body { /* must be on body for Firefox */
     width: 400px;
+  }
+
+  .root {
+    background: var(--color-background-main);
   }
 
   .queryContainer {
