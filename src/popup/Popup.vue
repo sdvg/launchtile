@@ -263,8 +263,9 @@
   @value resultItemHeight: 40px;
   @value maximumResultsInViewport: 10;
 
-  body { /* must be on body for Firefox */
-    width: 400px;
+  body {
+    width: 400px; /* must be defined on body for Firefox */
+    max-width: 100%; /* necessary for Firefox overflow menu */
   }
 
   .root {
