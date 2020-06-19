@@ -23,6 +23,7 @@
     flex-direction: column;
     padding: 16px;
     height: 100vh;
+    background: var(--color-background-main);
   }
 
   .snippets {

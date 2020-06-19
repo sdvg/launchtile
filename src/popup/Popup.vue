@@ -3,6 +3,7 @@
   import shortcuts from '@/mixins/shortcuts'
   import { SNIPPET } from '@/storageKeys'
   import { queryItemsByStorageKey } from '@/lib/storage'
+  import { isChrome } from '@/lib/environment'
   import sortBy from 'lodash/sortBy'
 
   export default {
@@ -33,6 +34,9 @@
       },
       viewportHeight () {
         return this.maximumResultsInViewport * this.resultItemHeight
+      },
+      isChrome () {
+        return isChrome()
       },
     },
     created () {
@@ -107,13 +111,13 @@
           break
         case this.resultTypes.BOOKMARKLET:
           browser.tabs.executeScript(null, { code: result.bookmarklet.url.replace(/^javascript:/, ``) })
-          window.close()
           break
         case this.resultTypes.SNIPPET:
           browser.tabs.executeScript(null, { code: result.snippet.content })
-          window.close()
           break
         }
+
+        window.close()
       },
       resultItemMouseOver (index) {
         if (!this.isResultItemMouseOverBlocked) {
@@ -175,6 +179,7 @@
 
 <template>
   <div
+    :class="$style.root"
     @mousemove="unblockResultItemMouseOver"
     @mousedown="unblockResultItemMouseOver"
   >
@@ -231,7 +236,7 @@
             :class="$style.faviconAction"
           />
           <img
-            v-else
+            v-else-if="isChrome"
             :class="$style.faviconBookmark"
             :src="`chrome://favicon/size/16@2x/${result.bookmark.url}`"
             alt=""
@@ -258,8 +263,13 @@
   @value resultItemHeight: 40px;
   @value maximumResultsInViewport: 10;
 
-  html {
-    width: 400px;
+  body {
+    width: 400px; /* must be defined on body for Firefox */
+    max-width: 100%; /* necessary for Firefox overflow menu */
+  }
+
+  .root {
+    background: var(--color-background-main);
   }
 
   .queryContainer {

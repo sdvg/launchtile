@@ -1,3 +1,6 @@
+const isDevelopment = process.env.NODE_ENV === `development`
+const isChrome = process.env.VUE_APP_BROWSER === `chrome`
+
 module.exports = {
   pages: {
     popup: {
@@ -14,8 +17,14 @@ module.exports = {
   pluginOptions: {
     browserExtension: {
       manifestTransformer: manifest => {
-        if (process.env.NODE_ENV === `development`) {
-          manifest.content_security_policy = `script-src 'self' 'unsafe-eval'; object-src 'self'; img-src chrome://favicon;`
+        const scriptSrc = `script-src 'self'${isDevelopment ? ` 'unsafe-eval'` : ``};`
+        const objectSource = `object-src 'self';`
+        const imageSource = isChrome ? `img-src chrome://favicon;` : ``
+
+        manifest.content_security_policy = [scriptSrc, objectSource, imageSource].join(` `)
+
+        if (isChrome) {
+          manifest.permissions.push(`chrome://favicon/`)
         }
 
         return manifest

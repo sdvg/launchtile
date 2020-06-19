@@ -6,10 +6,8 @@
   "permissions": [
     "activeTab",
     "bookmarks",
-    "chrome://favicon/",
     "storage"
   ],
-  "content_security_policy": "script-src 'self'; object-src 'self'; img-src chrome://favicon;",
   "icons": {
     "16": "icons/16.png",
     "48": "icons/48.png",
@@ -31,7 +29,7 @@
     "_execute_browser_action": {
       "suggested_key": {
         "windows": "Ctrl+Q",
-        "mac": "Command+E",
+        "mac": "MacCtrl+Q",
         "chromeos": "Ctrl+Q",
         "linux": "Ctrl+Q"
       }

@@ -145,5 +145,6 @@
   .footer {
     text-align: right;
     padding: 16px 4px 0;
+    line-height: 1;
   }
 </style>
