@@ -1,4 +1,10 @@
-# 2.0.0
+# 3.0.0 (2020-06-19)
+
+## Features
+
+* Add support for Firefox
+
+# 2.0.0 (2020-05-01)
 
 ## Features
 
@@ -9,7 +15,7 @@
 
 * Stop opening bookmarks when pressing _space_ in search field
 
-# 1.0.0
+# 1.0.0 (2020-04-07)
 
 ## Features
 
