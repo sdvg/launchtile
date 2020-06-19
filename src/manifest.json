@@ -29,7 +29,7 @@
     "_execute_browser_action": {
       "suggested_key": {
         "windows": "Ctrl+Q",
-        "mac": "Command+E",
+        "mac": "MacCtrl+Q",
         "chromeos": "Ctrl+Q",
         "linux": "Ctrl+Q"
       }
