@@ -12,11 +12,18 @@ Browser extension for swiftly opening bookmarks and running snippets
 * Initially, without search query, the most recently created bookmarks are shown
 * Dark and light theme, automatically toggled by system preferences
 
-To change the hotkey go to chrome://extensions/shortcuts and look for _LaunchTile_.
-
 ## Install
 
-[Chrome Web Store](https://chrome.google.com/webstore/detail/launchtile/jmcdhjepahpchldnembnbejniokgbbln)
+[Chrome](https://chrome.google.com/webstore/detail/launchtile/jmcdhjepahpchldnembnbejniokgbbln)
+[Firefox](https://addons.mozilla.org/en-US/firefox/addon/launchtile/)
+
+## Change Hotkeys
+
+Chrome:  
+Go to chrome://extensions/shortcuts and look for _LaunchTile_.
+
+Firefox:  
+Open about:addons, click on the cogwheel symbol, choose "Manage Extension Shortcuts" and look for LaunchTile.
 
 ## Build
 
