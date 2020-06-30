@@ -14,16 +14,16 @@ Browser extension for swiftly opening bookmarks and running snippets
 
 ## Install
 
-[Chrome](https://chrome.google.com/webstore/detail/launchtile/jmcdhjepahpchldnembnbejniokgbbln)
+[Chrome](https://chrome.google.com/webstore/detail/launchtile/jmcdhjepahpchldnembnbejniokgbbln)  
 [Firefox](https://addons.mozilla.org/en-US/firefox/addon/launchtile/)
 
 ## Change Hotkeys
 
 Chrome:  
-Go to chrome://extensions/shortcuts and look for _LaunchTile_.
+Go to **chrome://extensions/shortcuts** and look for _LaunchTile_.
 
 Firefox:  
-Open about:addons, click on the cogwheel symbol, choose "Manage Extension Shortcuts" and look for LaunchTile.
+Open **about:addons**, click on the cogwheel symbol, choose "Manage Extension Shortcuts" and look for LaunchTile.
 
 ## Build
 
