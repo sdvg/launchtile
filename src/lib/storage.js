@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid'
 
 const storageApi = browser.storage.local
 
-const createItem = async (storageKey, values) => {
+const createCollectionItem = async (storageKey, values) => {
   const id = `${storageKey}_${uuidv4()}`
   const item = {
     id,
@@ -14,7 +14,7 @@ const createItem = async (storageKey, values) => {
   return item
 }
 
-const queryItemsByStorageKey = async storageKey => {
+const queryCollectionItemsByStorageKey = async storageKey => {
   const allItems = await storageApi.get()
 
   return Object.values(allItems).filter(item => item.id && item.id.startsWith(storageKey))
@@ -31,8 +31,8 @@ const removeItem = id => {
 }
 
 export {
-  createItem,
-  queryItemsByStorageKey,
+  createCollectionItem,
+  queryCollectionItemsByStorageKey,
   updateItem,
   removeItem,
 }

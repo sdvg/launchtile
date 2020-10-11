@@ -2,7 +2,7 @@
   import IconCog from '@/icons/IconCog'
   import shortcuts from '@/mixins/shortcuts'
   import { SNIPPET } from '@/storageKeys'
-  import { queryItemsByStorageKey } from '@/lib/storage'
+  import { queryCollectionItemsByStorageKey } from '@/lib/storage'
   import { isChrome } from '@/lib/environment'
   import sortBy from 'lodash/sortBy'
 
@@ -45,7 +45,7 @@
     },
     methods: {
       async fetchSnippets () {
-        this.snippets = await queryItemsByStorageKey(SNIPPET) || []
+        this.snippets = await queryCollectionItemsByStorageKey(SNIPPET) || []
       },
       async fetchRecentBookmarks () {
         this.results = (await browser.bookmarks.getRecent(10))
