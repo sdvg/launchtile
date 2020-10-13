@@ -1,10 +1,11 @@
 <script>
   import IconCog from '@/icons/IconCog'
   import shortcuts from '@/mixins/shortcuts'
-  import { SNIPPET } from '@/storageKeys'
+  import { SNIPPET } from '@/constants/storageKeys'
   import { queryCollectionItemsByStorageKey } from '@/lib/storage'
   import { isChrome } from '@/lib/environment'
   import sortBy from 'lodash/sortBy'
+  import runSnippet from '@/lib/runSnippet'
 
   export default {
     components: {
@@ -110,10 +111,13 @@
           browser.tabs.create({ url: result.bookmark.url })
           break
         case this.resultTypes.BOOKMARKLET:
-          browser.tabs.executeScript(null, { code: result.bookmarklet.url.replace(/^javascript:/, ``) })
+          runSnippet({ code: result.bookmarklet.url.replace(/^javascript:/, ``) })
           break
         case this.resultTypes.SNIPPET:
-          browser.tabs.executeScript(null, { code: result.snippet.content })
+          runSnippet({
+            code: result.snippet.content,
+            executionType: result.snippet.executionType,
+          })
           break
         }
 

@@ -1,7 +1,7 @@
 <script>
   import Sidebar from './Sidebar'
   import Details from './Details'
-  import { SNIPPET } from '@/storageKeys'
+  import { SNIPPET } from '@/constants/storageKeys'
   import {
     createCollectionItem,
     queryCollectionItemsByStorageKey,
@@ -9,6 +9,7 @@
     removeItem,
   } from '@/lib/storage'
   import sortBy from 'lodash/sortBy'
+  import { EXECUTE_SCRIPT } from '@/constants/executionTypes'
 
   export default {
     components: {
@@ -46,6 +47,7 @@
             title: `Snippet #${this.snippets.length + 1}`,
             created: new Date().toISOString(),
             updated: new Date().toISOString(),
+            executionType: EXECUTE_SCRIPT,
             content: ``,
           })
 
