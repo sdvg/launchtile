@@ -31,6 +31,7 @@
     watch: {
       inputSnippet (snippet) {
         this.snippet = clone(snippet)
+        this.isAdvancedOpen = false
       },
       'snippet.title': `emitChanges`,
       'snippet.content': `emitChanges`,
