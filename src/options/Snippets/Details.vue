@@ -110,7 +110,7 @@
           Use Browser API <code>executeScript</code>
 
           <p :class="$style.executionTypeOptionExplanation">
-            Use the Browser default API for injecting scripts. Suitable for most use cases.
+            Use the Browser default API to inject snippets. Suitable for most use cases.
           </p>
         </div>
       </label>
