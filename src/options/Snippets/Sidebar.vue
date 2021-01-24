@@ -80,7 +80,7 @@
     color: var(--color-text-stronger);
     font-size: 16px;
     font-weight: bold;
-    margin-bottom: 15px; /* Visually align with title input */
+    margin: 4px 0 14px; /* Visually align with title input */
   }
 
   @media(prefers-color-scheme: light) {

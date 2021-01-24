@@ -1,14 +1,15 @@
 <script>
   import Sidebar from './Sidebar'
   import Details from './Details'
-  import { SNIPPET } from '@/storageKeys'
+  import { SNIPPET } from '@/constants/storageKeys'
   import {
-    createItem,
-    queryItemsByStorageKey,
+    createCollectionItem,
+    queryCollectionItemsByStorageKey,
     updateItem,
     removeItem,
   } from '@/lib/storage'
   import sortBy from 'lodash/sortBy'
+  import { EXECUTE_SCRIPT } from '@/constants/executionTypes'
 
   export default {
     components: {
@@ -35,17 +36,18 @@
     },
     methods: {
       async fetchSnippets () {
-        this.snippets = await queryItemsByStorageKey(SNIPPET) || []
+        this.snippets = await queryCollectionItemsByStorageKey(SNIPPET) || []
       },
       storageChanged () {
         this.fetchSnippets()
       },
       async newSnippet () {
         try {
-          const newSnippet = await createItem(SNIPPET, {
+          const newSnippet = await createCollectionItem(SNIPPET, {
             title: `Snippet #${this.snippets.length + 1}`,
             created: new Date().toISOString(),
             updated: new Date().toISOString(),
+            executionType: EXECUTE_SCRIPT,
             content: ``,
           })
 
