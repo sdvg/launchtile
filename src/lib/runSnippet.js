@@ -1,7 +1,7 @@
-import * as executionTypes from '@/constants/executionTypes.js'
+import * as ExecutionTypes from '@/constants/executionTypes.js'
 
-export default ({ code, executionType = executionTypes.EXECUTE_SCRIPT }) => {
-  if (executionType === executionTypes.INJECT) {
+export default ({ code, executionType = ExecutionTypes.EXECUTE_SCRIPT }) => {
+  if (executionType === ExecutionTypes.INJECT) {
     const generatedCode = `{
       const scriptElement = document.createElement('script');
       scriptElement.textContent = unescape('${escape(code)}');

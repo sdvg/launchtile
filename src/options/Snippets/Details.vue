@@ -4,7 +4,7 @@
   import CodeEditor from './CodeEditor'
   import IconTrash from '@/icons/IconTrash'
   import IconChevron from '@/icons/IconChevron'
-  import * as executionTypes from '@/constants/executionTypes'
+  import * as ExecutionTypes from '@/constants/executionTypes'
 
   export default {
     components: {
@@ -23,7 +23,7 @@
     },
     data () {
       return {
-        executionTypes,
+        ExecutionTypes,
         snippet: null,
         isAdvancedOpen: false,
       }
@@ -106,7 +106,7 @@
           v-model="snippet.executionType"
           type="radio"
           name="executionType"
-          :value="executionTypes.EXECUTE_SCRIPT"
+          :value="ExecutionTypes.EXECUTE_SCRIPT"
         >
         <div>
           Use Browser API <code>executeScript</code>
@@ -123,7 +123,7 @@
           v-model="snippet.executionType"
           type="radio"
           name="executionType"
-          :value="executionTypes.INJECT"
+          :value="ExecutionTypes.INJECT"
         >
         <div>
           Inject code in <code>&lt;script&gt;</code> tag
