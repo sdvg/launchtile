@@ -102,8 +102,8 @@
 
       <label :class="$style.executionTypeOptionLabel">
         <input
-          :class="$style.executionTypeOptionInput"
           v-model="snippet.executionType"
+          :class="$style.executionTypeOptionInput"
           type="radio"
           name="executionType"
           :value="ExecutionTypes.EXECUTE_SCRIPT"
@@ -119,8 +119,8 @@
 
       <label :class="$style.executionTypeOptionLabel">
         <input
-          :class="$style.executionTypeOptionInput"
           v-model="snippet.executionType"
+          :class="$style.executionTypeOptionInput"
           type="radio"
           name="executionType"
           :value="ExecutionTypes.INJECT"
