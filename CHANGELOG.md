@@ -1,3 +1,10 @@
+# 3.1.0 (2021-01-24)
+
+## Features
+
+* Add execution type option for snippets
+* Add search for code editor
+
 # 3.0.0 (2020-06-19)
 
 ## Features
