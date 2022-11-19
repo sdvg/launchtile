@@ -135,6 +135,10 @@
       unblockResultItemMouseOver () {
         this.isResultItemMouseOverBlocked = false
       },
+      handleOptionsLinkClick () {
+        browser.tabs.create({ url: `options.html` })
+        window.close()
+      },
     },
     shortcuts: {
       down () {
@@ -200,9 +204,9 @@
 
       <a
         href="options.html"
-        target="_blank"
         title="Options"
         :class="$style.optionsLink"
+        @click.prevent="handleOptionsLinkClick"
       >
         <IconCog :class="$style.optionsLinkIcon" />
         <span class="visually-hidden">Options</span>
