@@ -51,7 +51,7 @@
       async fetchRecentBookmarks () {
         this.results = (await browser.bookmarks.getRecent(10))
           .map(bookmark => ({
-            type: this.resultTypes.BOOKMARK,
+            type: this.isUrlBookmarklet(bookmark.url) ? this.resultTypes.BOOKMARKLET : this.resultTypes.BOOKMARK,
             title: bookmark.title,
             bookmark,
           }))
