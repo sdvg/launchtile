@@ -1,6 +1,6 @@
 <script>
   import Sidebar from './Sidebar'
-  import Details from './Details'
+  import Snippet from './Snippet'
   import { SNIPPET } from '@/constants/storageKeys'
   import {
     createCollectionItem,
@@ -14,7 +14,7 @@
   export default {
     components: {
       Sidebar,
-      Details,
+      Snippet,
     },
     data () {
       return {
@@ -98,9 +98,9 @@
       @newSnippet="newSnippet"
       @openSnippet="openSnippet"
     />
-    <Details
+    <Snippet
       v-if="activeSnippet"
-      :class="$style.details"
+      :class="$style.snippet"
       :inputSnippet="activeSnippet"
       @deleteSnippet="deleteSnippet(activeSnippet)"
       @updateSnippet="updateSnippet"
@@ -116,11 +116,11 @@
 
   .sidebar {
     width: 230px;
-    margin-bottom: 28px; /* visually align with Details footer */
+    margin-bottom: 28px; /* visually align with Snippet footer */
     flex-shrink: 0;
   }
 
-  .details {
+  .snippet {
     flex-grow: 1;
   }
 </style>

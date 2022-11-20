@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   parserOptions: {
-    parser: `babel-eslint`,
+    parser: `@babel/eslint-parser`,
   },
   env: {
     browser: true,
@@ -22,6 +22,7 @@ module.exports = {
     'vue/script-indent': [`error`, 2, { baseIndent: 1 }],
     'vue/attribute-hyphenation': [`error`, `never`],
     'vue/no-use-v-if-with-v-for': [`off`, { allowUsingIterationVar: true }],
+    'vue/multi-word-component-names': `off`,
   },
   overrides: [
     {
