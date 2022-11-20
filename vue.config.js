@@ -29,6 +29,9 @@ module.exports = {
 
         return manifest
       },
+      extensionReloaderOptions: {
+        port: process.env.PORT || 9090,
+      },
     },
   },
   configureWebpack: {

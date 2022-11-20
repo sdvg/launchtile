@@ -3,36 +3,36 @@
   "version": "3.1.0",
   "private": true,
   "scripts": {
-    "serve:chrome": "VUE_APP_BROWSER=chrome vue-cli-service build --mode development --watch",
-    "serve:firefox": "VUE_APP_BROWSER=firefox vue-cli-service build --mode development --watch",
+    "serve:chrome": "VUE_APP_BROWSER=chrome PORT=9090 vue-cli-service build --mode development --watch --dest=dev-dist-chrome",
+    "serve:firefox": "VUE_APP_BROWSER=firefox PORT=9091 vue-cli-service build --mode development --watch --dest=dev-dist-firefox",
     "build:chrome": "VUE_APP_BROWSER=chrome vue-cli-service build",
     "build:firefox": "VUE_APP_BROWSER=firefox vue-cli-service build",
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "codemirror": "^5.52.2",
-    "core-js": "^3.6.4",
-    "date-fns": "^2.11.1",
-    "uuid": "^7.0.3",
-    "vue": "^2.6.11"
+    "codemirror": "5.52.2",
+    "core-js": "3.26.1",
+    "date-fns": "2.29.3",
+    "uuid": "7.0.3",
+    "vue": "2.7.14"
   },
   "devDependencies": {
-    "@vue/cli-plugin-babel": "~4.2.0",
-    "@vue/cli-plugin-eslint": "~4.2.0",
-    "@vue/cli-plugin-unit-jest": "~4.2.0",
-    "@vue/cli-service": "~4.2.0",
-    "@vue/eslint-config-standard": "^5.1.0",
+    "@babel/eslint-parser": "7.19.1",
+    "@vue/cli-plugin-babel": "4.2.0",
+    "@vue/cli-plugin-eslint": "5.0.8",
+    "@vue/cli-plugin-unit-jest": "4.2.0",
+    "@vue/cli-service": "4.2.0",
+    "@vue/eslint-config-standard": "8.0.1",
     "@vue/test-utils": "1.0.0-beta.31",
-    "babel-eslint": "^10.0.3",
-    "eslint": "^6.7.2",
-    "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-node": "^11.0.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.0",
-    "eslint-plugin-vue": "^6.1.2",
-    "lodash": "^4.17.15",
-    "vue-cli-plugin-browser-extension": "~0.24.0",
-    "vue-template-compiler": "^2.6.11"
+    "eslint": "8.28.0",
+    "eslint-plugin-import": "2.26.0",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "6.1.1",
+    "eslint-plugin-standard": "5.0.0",
+    "eslint-plugin-vue": "9.7.0",
+    "lodash": "4.17.21",
+    "vue-cli-plugin-browser-extension": "0.25.2",
+    "vue-template-compiler": "2.7.14"
   }
 }
