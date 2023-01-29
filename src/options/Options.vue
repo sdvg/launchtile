@@ -1,33 +1,40 @@
 <script>
-  import Snippets from './Snippets/Snippets'
-  import SnippetsIntro from './SnippetsIntro'
+  import OptionsSidebar from './OptionsSidebar/OptionsSidebar'
 
   export default {
     components: {
-      Snippets,
-      SnippetsIntro,
+      OptionsSidebar,
     },
   }
 </script>
 
 <template>
   <div :class="$style.root">
-    <SnippetsIntro />
-    <Snippets :class="$style.snippets" />
+    <OptionsSidebar :class="$style.sidebar" />
+
+    <div :class="$style.main">
+      <router-view />
+    </div>
   </div>
 </template>
 
 <style module>
   .root {
     display: flex;
-    flex-direction: column;
-    padding: 16px;
     height: 100vh;
+    padding: 16px;
+    gap: 16px;
     background: var(--color-background-main);
   }
 
-  .snippets {
-    margin-top: 16px;
+  .sidebar {
+    width: 400px;
+  }
+
+  .main {
+    background: var(--color-background-stronger);
     flex-grow: 1;
+    border-radius: 16px;
+    padding: 16px;
   }
 </style>

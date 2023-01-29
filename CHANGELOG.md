@@ -1,3 +1,14 @@
+# 3.2.0 (2022-11-20)
+
+## Features
+
+* Firefox: Add option to load favicons from DuckDuckGo
+
+## Bug Fixes
+
+* Firefox: Close Popup when clicking on the options link
+* Show correct icon for Bookmarklets in recent bookmarks view
+
 # 3.1.0 (2021-01-24)
 
 ## Features

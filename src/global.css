@@ -5,6 +5,7 @@
   --color-text-stronger: #d6d6d6;
   --color-accent: #ba124a;
   --color-bookmarklet-icon: #fff;
+  --focus-box-shadow: 0 0 3px 3px var(--color-accent);
 }
 
 @media(prefers-color-scheme: light) {
@@ -46,6 +47,11 @@ ul {
 
 button {
   cursor: pointer;
+}
+
+a:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-box-shadow);
 }
 
 /*

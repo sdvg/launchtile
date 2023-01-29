@@ -6,12 +6,19 @@
   import { isChrome } from '@/lib/environment'
   import sortBy from 'lodash/sortBy'
   import runSnippet from '@/lib/runSnippet'
+  import { OptionKeys } from '@/lib/options'
 
   export default {
     components: {
       IconCog,
     },
     mixins: [shortcuts],
+    props: {
+      options: {
+        type: Object,
+        required: true,
+      },
+    },
     data () {
       return {
         query: ``,
@@ -36,8 +43,8 @@
       viewportHeight () {
         return this.maximumResultsInViewport * this.resultItemHeight
       },
-      isChrome () {
-        return isChrome()
+      hasFavicon () {
+        return isChrome() || this.options[OptionKeys.ALLOW_FAVICONS]
       },
     },
     created () {
@@ -139,6 +146,13 @@
         browser.tabs.create({ url: `options.html` })
         window.close()
       },
+      getFaviconSource (bookmarkUrl) {
+        const { hostname } = new URL(bookmarkUrl)
+
+        return isChrome()
+          ? `chrome://favicon/size/16@2x/${bookmarkUrl}`
+          : `https://icons.duckduckgo.com/ip3/${hostname}.ico`
+      },
     },
     shortcuts: {
       down () {
@@ -221,7 +235,6 @@
     </p>
 
     <ol
-      v-if="results.length"
       ref="resultList"
       :class="$style.resultList"
     >
@@ -243,10 +256,11 @@
             v-if="result.type === resultTypes.BOOKMARKLET || result.type === resultTypes.SNIPPET"
             :class="$style.faviconAction"
           />
+
           <img
-            v-else-if="isChrome"
+            v-else-if="hasFavicon"
             :class="$style.faviconBookmark"
-            :src="`chrome://favicon/size/16@2x/${result.bookmark.url}`"
+            :src="getFaviconSource(result.bookmark.url)"
             alt=""
           >
 
