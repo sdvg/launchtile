@@ -5,7 +5,6 @@ import { getOptions } from '@/lib/options'
 
 (async () => {
   const options = await getOptions()
-  console.log(options)
 
   /* eslint-disable no-new */
   new Vue({

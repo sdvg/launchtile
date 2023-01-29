@@ -51,6 +51,9 @@
       this.fetchRecentBookmarks()
       this.fetchSnippets()
     },
+    mounted () {
+      this.$refs.queryInput.focus(); // HTML autofocus attribute doesn't work in Firefox because component rendering is slightly delayed
+    },
     methods: {
       async fetchSnippets () {
         this.snippets = await queryCollectionItemsByStorageKey(SNIPPET) || []
@@ -210,8 +213,8 @@
         v-model="query"
         type="search"
         :class="$style.queryInput"
+        ref="queryInput"
         placeholder="Search…"
-        autofocus
         spellcheck="false"
         @input="queryChanged"
       >
