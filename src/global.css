@@ -1,6 +1,7 @@
 :root {
   --color-background-main: #242424;
   --color-background-stronger: #0c0c0c;
+  --color-background-alt: #404040;
   --color-text-main: #b4b4b4;
   --color-text-stronger: #d6d6d6;
   --color-accent: #ba124a;
@@ -12,6 +13,7 @@
   :root {
     --color-background-main: #e1e1e1;
     --color-background-stronger: #fff;
+    --color-background-alt: #404040;
     --color-text-main: #0f0f0f;
     --color-text-stronger: #e1e1e1;
     --color-accent: #ba124a;

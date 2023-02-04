@@ -84,9 +84,10 @@
 
 <style module>
   .root {
+    width: fit-content;
+    padding: 16px;
     background: var(--color-background-stronger);
     border-radius: 16px;
-    padding: 16px;
   }
 
   .headline {
