@@ -36,7 +36,10 @@
 </script>
 
 <template>
-  <div v-if="options">
+  <div
+    :class="$style.root"
+    v-if="options"
+  >
     <h2 :class="$style.headline">
       Theme
     </h2>
@@ -80,6 +83,12 @@
 </template>
 
 <style module>
+  .root {
+    background: var(--color-background-stronger);
+    border-radius: 16px;
+    padding: 16px;
+  }
+
   .headline {
     color: var(--color-accent);
     border-bottom: 1px solid var(--color-accent);
