@@ -1,4 +1,4 @@
-:root {
+:root[data-theme="dark"] {
   --color-background-main: #242424;
   --color-background-stronger: #0c0c0c;
   --color-background-alt: #404040;
@@ -9,16 +9,14 @@
   --focus-box-shadow: 0 0 3px 3px var(--color-accent);
 }
 
-@media(prefers-color-scheme: light) {
-  :root {
-    --color-background-main: #e1e1e1;
-    --color-background-stronger: #fff;
-    --color-background-alt: #404040;
-    --color-text-main: #0f0f0f;
-    --color-text-stronger: #e1e1e1;
-    --color-accent: #ba124a;
-    --color-bookmarklet-icon: #0f0f0f;
-  }
+:root[data-theme="light"] {
+  --color-background-main: #e1e1e1;
+  --color-background-stronger: #fff;
+  --color-background-alt: #404040;
+  --color-text-main: #0f0f0f;
+  --color-text-stronger: #e1e1e1;
+  --color-accent: #ba124a;
+  --color-bookmarklet-icon: #0f0f0f;
 }
 
 body {

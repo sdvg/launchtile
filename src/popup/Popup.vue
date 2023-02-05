@@ -7,6 +7,7 @@
   import sortBy from 'lodash/sortBy'
   import runSnippet from '@/lib/runSnippet'
   import { OptionKeys } from '@/lib/options'
+  import useTheme from '@/composables/useTheme'
 
   export default {
     components: {
@@ -50,6 +51,7 @@
     created () {
       this.fetchRecentBookmarks()
       this.fetchSnippets()
+      useTheme()
     },
     mounted () {
       this.$refs.queryInput.focus(); // HTML autofocus attribute doesn't work in Firefox because component rendering is slightly delayed

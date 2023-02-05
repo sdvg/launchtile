@@ -1,5 +1,8 @@
 <script setup>
   import OptionsHeader from './OptionsHeader/OptionsHeader'
+  import useTheme from '@/composables/useTheme'
+
+  useTheme()
 </script>
 
 <template>
