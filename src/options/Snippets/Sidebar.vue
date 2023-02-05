@@ -82,10 +82,8 @@
     margin: 4px 0 15px; /* Visually align with title input */
   }
 
-  @media(prefers-color-scheme: light) {
-    .newButton {
-      color: var(--color-text-main);
-    }
+  :root[data-theme="light"] .newButton {
+    color: var(--color-text-main);
   }
 
   .newButtonIcon {

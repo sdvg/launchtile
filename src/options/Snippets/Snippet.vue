@@ -173,10 +173,8 @@
     color: var(--color-text-stronger);
   }
 
-  @media(prefers-color-scheme: light) {
-    .titleInput {
-      color: var(--color-text-main);
-    }
+  :root[data-theme="light"] .titleInput {
+    color: var(--color-text-main);
   }
 
   .actions {
@@ -198,13 +196,13 @@
     color: var(--color-accent);
   }
 
-  @media(prefers-color-scheme: light) {
-    .action {
-      color: var(--color-accent);
-    }
-    .action.isActive {
-      color: var(--color-text-main);
-    }
+
+  :root[data-theme="light"] .action {
+    color: var(--color-accent);
+  }
+
+  :root[data-theme="light"] .action.isActive {
+    color: var(--color-text-main);
   }
 
   .actionIcon {
