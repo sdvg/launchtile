@@ -74,8 +74,11 @@
     display: flex;
     align-items: center;
     padding: 0 16px;
-    border-left: 1px solid var(--color-text-main);
     cursor: pointer;
+  }
+
+  .option:not(:first-child) .label {
+    border-left: 1px solid var(--color-text-main);
   }
 
   :focus-visible + .label {
