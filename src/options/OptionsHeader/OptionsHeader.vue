@@ -43,7 +43,8 @@
         href="https://github.com/sdvg/launchtile"
         target="_blank"
         rel="noopener"
-      >GitHub</a> |
+      >GitHub</a>
+      |
       <a
         href="https://github.com/sdvg/launchtile/blob/master/CHANGELOG.md"
         target="_blank"
