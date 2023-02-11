@@ -1,12 +1,15 @@
+:root {
+  --color-accent: #ba124a;
+  --focus-box-shadow: 0 0 3px 3px var(--color-accent);
+}
+
 :root[data-theme="dark"] {
   --color-background-main: #242424;
   --color-background-stronger: #0c0c0c;
   --color-background-alt: #404040;
   --color-text-main: #b4b4b4;
   --color-text-stronger: #d6d6d6;
-  --color-accent: #ba124a;
   --color-bookmarklet-icon: #fff;
-  --focus-box-shadow: 0 0 3px 3px var(--color-accent);
 }
 
 :root[data-theme="light"] {
@@ -15,7 +18,6 @@
   --color-background-alt: #ffe3e9;
   --color-text-main: #0f0f0f;
   --color-text-stronger: #e1e1e1;
-  --color-accent: #ba124a;
   --color-bookmarklet-icon: #0f0f0f;
 }
 
