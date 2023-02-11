@@ -1,6 +1,6 @@
 <script setup>
-  import SnippetsIntro from '../SnippetsIntro';
-  import Snippets from '../Snippets/Snippets';
+  import SnippetsIntro from '../SnippetsIntro'
+  import Snippets from '../Snippets/Snippets'
 </script>
 
 <template>

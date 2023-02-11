@@ -37,8 +37,8 @@
 
 <template>
   <div
-    :class="$style.root"
     v-if="options"
+    :class="$style.root"
   >
     <h2 :class="$style.headline">
       Theme

@@ -54,7 +54,7 @@
       useTheme()
     },
     mounted () {
-      this.$refs.queryInput.focus(); // HTML autofocus attribute doesn't work in Firefox because component rendering is slightly delayed
+      this.$refs.queryInput.focus() // HTML autofocus attribute doesn't work in Firefox because component rendering is slightly delayed
     },
     methods: {
       async fetchSnippets () {
@@ -212,10 +212,10 @@
   >
     <div :class="$style.queryContainer">
       <input
+        ref="queryInput"
         v-model="query"
         type="search"
         :class="$style.queryInput"
-        ref="queryInput"
         placeholder="Search…"
         spellcheck="false"
         @input="queryChanged"

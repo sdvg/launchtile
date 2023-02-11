@@ -37,7 +37,7 @@
     </nav>
 
     <div :class="$style.right">
-      Version {{version}}
+      Version {{ version }}
       |
       <a
         href="https://github.com/sdvg/launchtile"

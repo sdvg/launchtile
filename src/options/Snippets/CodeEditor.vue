@@ -18,8 +18,8 @@
   import * as Themes from '@/constants/themes'
 
   const THEME_MAP = {
-   [Themes.DARK]: `moxer`,
-   [Themes.LIGHT]: `3024-day`,
+    [Themes.DARK]: `moxer`,
+    [Themes.LIGHT]: `3024-day`,
   }
 
   export default {
@@ -29,7 +29,7 @@
         required: true,
       },
     },
-    data() {
+    data () {
       return {
         options: null,
       }
@@ -40,9 +40,9 @@
           this.codeMirror.setValue(value)
         }
       },
-      options() {
+      options () {
         this.setEditorTheme()
-      }
+      },
     },
     async created () {
       this.options = await getOptions()

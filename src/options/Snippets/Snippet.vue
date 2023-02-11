@@ -196,7 +196,6 @@
     color: var(--color-accent);
   }
 
-
   :root[data-theme="light"] .action {
     color: var(--color-accent);
   }
