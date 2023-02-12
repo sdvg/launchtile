@@ -1,6 +1,6 @@
 {
   "name": "@sdvg/launchtile",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "private": true,
   "scripts": {
     "serve:chrome": "VUE_APP_BROWSER=chrome PORT=9090 vue-cli-service build --mode development --watch --dest=dev-dist-chrome",
