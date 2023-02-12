@@ -9,6 +9,7 @@
 
 * Firefox: Close Popup when clicking on the options link
 * Show correct icon for Bookmarklets in recent bookmarks view
+* Fix bug where Bookmarklets from recent bookmarks would not execute 
 
 # 3.1.0 (2021-01-24)
 

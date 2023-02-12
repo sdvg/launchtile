@@ -61,12 +61,28 @@
         this.snippets = await queryCollectionItemsByStorageKey(SNIPPET) || []
       },
       async fetchRecentBookmarks () {
-        this.results = (await browser.bookmarks.getRecent(10))
+        const bookmarksAndBookmarklets = await browser.bookmarks.getRecent(10)
+
+        const bookmarkResults = bookmarksAndBookmarklets
+          .filter(({ url }) => !this.isUrlBookmarklet(url))
           .map(bookmark => ({
-            type: this.isUrlBookmarklet(bookmark.url) ? this.resultTypes.BOOKMARKLET : this.resultTypes.BOOKMARK,
+            type: this.resultTypes.BOOKMARK,
             title: bookmark.title,
             bookmark,
           }))
+
+        const bookmarkletResults = bookmarksAndBookmarklets
+          .filter(({ url }) => this.isUrlBookmarklet(url))
+          .map(bookmarklet => ({
+            type: this.resultTypes.BOOKMARKLET,
+            title: bookmarklet.title,
+            bookmarklet,
+          }))
+
+        this.results = sortBy([
+          ...bookmarkResults,
+          ...bookmarkletResults,
+        ], `title`)
       },
       async queryChanged () {
         if (this.query) {
