@@ -69,7 +69,6 @@
   .root {
     display: flex;
     flex-direction: column;
-    padding: 0 4px;
   }
 
   .newButton {
@@ -80,13 +79,11 @@
     color: var(--color-text-stronger);
     font-size: 16px;
     font-weight: bold;
-    margin: 4px 0 14px; /* Visually align with title input */
+    margin: 4px 0 15px; /* Visually align with title input */
   }
 
-  @media(prefers-color-scheme: light) {
-    .newButton {
-      color: var(--color-text-main);
-    }
+  :root[data-theme="light"] .newButton {
+    color: var(--color-text-main);
   }
 
   .newButtonIcon {

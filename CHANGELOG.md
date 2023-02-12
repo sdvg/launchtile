@@ -1,3 +1,16 @@
+# 3.2.0 (2023-02-12)
+
+## Features
+
+* Firefox: Add option to load favicons from DuckDuckGo
+* Add option to configure theme (Dark, Light or System)
+
+## Bug Fixes
+
+* Firefox: Close Popup when clicking on the options link
+* Show correct icon for Bookmarklets in recent bookmarks view
+* Fix bug where Bookmarklets from recent bookmarks would not execute 
+
 # 3.1.0 (2021-01-24)
 
 ## Features

@@ -11,11 +11,16 @@
   import 'codemirror/addon/dialog/dialog.css'
   import 'codemirror/addon/search/searchcursor'
   import 'codemirror/addon/search/search'
-  import 'codemirror/theme/3024-day.css'
+  import 'codemirror/theme/idea.css'
   import 'codemirror/theme/moxer.css'
+  import getThemeByOptionOrPreference from '@/lib/getThemeByOptionOrPreference'
+  import { getOptions } from '@/lib/options'
+  import * as Themes from '@/constants/themes'
 
-  const THEME_DARK = `moxer`
-  const THEME_LIGHT = `3024-day`
+  const THEME_MAP = {
+    [Themes.DARK]: `moxer`,
+    [Themes.LIGHT]: `idea`,
+  }
 
   export default {
     props: {
@@ -24,12 +29,23 @@
         required: true,
       },
     },
+    data () {
+      return {
+        options: null,
+      }
+    },
     watch: {
       value (value) {
         if (value !== this.codeMirror.getValue()) {
           this.codeMirror.setValue(value)
         }
       },
+      options () {
+        this.setEditorTheme()
+      },
+    },
+    async created () {
+      this.options = await getOptions()
     },
     mounted () {
       this.codeMirror = CodeMirror(this.$refs.root, {
@@ -47,21 +63,17 @@
       })
 
       this.codeMirror.on(`change`, this.onChange)
-
-      this.lightThemeMediaQuery = matchMedia(`(prefers-color-scheme: light)`)
-      this.setEditorTheme()
-      this.lightThemeMediaQuery.addEventListener(`change`, this.setEditorTheme)
     },
     destroyed () {
       this.codeMirror.off(`change`, this.onChange)
-      this.lightThemeMediaQuery.removeEventListener(`change`, this.setEditorTheme)
     },
     methods: {
       onChange () {
         this.$emit(`input`, this.codeMirror.getValue())
       },
       setEditorTheme () {
-        this.codeMirror.setOption(`theme`, this.lightThemeMediaQuery.matches ? THEME_LIGHT : THEME_DARK)
+        const editorTheme = THEME_MAP[getThemeByOptionOrPreference(this.options.theme)]
+        this.codeMirror.setOption(`theme`, editorTheme)
       },
     },
   }
@@ -83,16 +95,5 @@
 
   :global(.CodeMirror) {
     flex-grow: 1;
-  }
-
-  :global(.cm-searching.CodeMirror-selectedtext) {
-    background-color: #ffa;
-    color: #4e4e4e !important;
-  }
-
-  @media(prefers-color-scheme: light) {
-    :global(.cm-searching.CodeMirror-selectedtext) {
-      color: #4e4e4e !important;
-    }
   }
 </style>

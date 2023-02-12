@@ -98,6 +98,7 @@
       @newSnippet="newSnippet"
       @openSnippet="openSnippet"
     />
+
     <Snippet
       v-if="activeSnippet"
       :class="$style.snippet"
@@ -112,6 +113,7 @@
   .root {
     min-height: 400px;
     display: flex;
+    gap: 8px;
   }
 
   .sidebar {

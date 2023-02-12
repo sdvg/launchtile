@@ -1,19 +1,17 @@
-<script>
-  import Snippets from './Snippets/Snippets'
-  import SnippetsIntro from './SnippetsIntro'
+<script setup>
+  import OptionsHeader from './OptionsHeader/OptionsHeader'
+  import useTheme from '@/composables/useTheme'
 
-  export default {
-    components: {
-      Snippets,
-      SnippetsIntro,
-    },
-  }
+  useTheme()
 </script>
 
 <template>
   <div :class="$style.root">
-    <SnippetsIntro />
-    <Snippets :class="$style.snippets" />
+    <OptionsHeader />
+
+    <div :class="$style.main">
+      <router-view />
+    </div>
   </div>
 </template>
 
@@ -21,13 +19,12 @@
   .root {
     display: flex;
     flex-direction: column;
-    padding: 16px;
     height: 100vh;
     background: var(--color-background-main);
   }
 
-  .snippets {
-    margin-top: 16px;
+  .main {
     flex-grow: 1;
+    margin: 16px;
   }
 </style>

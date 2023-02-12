@@ -31,6 +31,7 @@ const removeItem = id => {
 }
 
 export {
+  storageApi,
   createCollectionItem,
   queryCollectionItemsByStorageKey,
   updateItem,

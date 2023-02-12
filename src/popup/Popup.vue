@@ -6,12 +6,20 @@
   import { isChrome } from '@/lib/environment'
   import sortBy from 'lodash/sortBy'
   import runSnippet from '@/lib/runSnippet'
+  import { OptionKeys } from '@/lib/options'
+  import useTheme from '@/composables/useTheme'
 
   export default {
     components: {
       IconCog,
     },
     mixins: [shortcuts],
+    props: {
+      options: {
+        type: Object,
+        required: true,
+      },
+    },
     data () {
       return {
         query: ``,
@@ -36,25 +44,45 @@
       viewportHeight () {
         return this.maximumResultsInViewport * this.resultItemHeight
       },
-      isChrome () {
-        return isChrome()
+      hasFavicon () {
+        return isChrome() || this.options[OptionKeys.ALLOW_FAVICONS]
       },
     },
     created () {
       this.fetchRecentBookmarks()
       this.fetchSnippets()
+      useTheme()
+    },
+    mounted () {
+      this.$refs.queryInput.focus() // HTML autofocus attribute doesn't work in Firefox because component rendering is slightly delayed
     },
     methods: {
       async fetchSnippets () {
         this.snippets = await queryCollectionItemsByStorageKey(SNIPPET) || []
       },
       async fetchRecentBookmarks () {
-        this.results = (await browser.bookmarks.getRecent(10))
+        const bookmarksAndBookmarklets = await browser.bookmarks.getRecent(10)
+
+        const bookmarkResults = bookmarksAndBookmarklets
+          .filter(({ url }) => !this.isUrlBookmarklet(url))
           .map(bookmark => ({
             type: this.resultTypes.BOOKMARK,
             title: bookmark.title,
             bookmark,
           }))
+
+        const bookmarkletResults = bookmarksAndBookmarklets
+          .filter(({ url }) => this.isUrlBookmarklet(url))
+          .map(bookmarklet => ({
+            type: this.resultTypes.BOOKMARKLET,
+            title: bookmarklet.title,
+            bookmarklet,
+          }))
+
+        this.results = sortBy([
+          ...bookmarkResults,
+          ...bookmarkletResults,
+        ], `title`)
       },
       async queryChanged () {
         if (this.query) {
@@ -139,6 +167,13 @@
         browser.tabs.create({ url: `options.html` })
         window.close()
       },
+      getFaviconSource (bookmarkUrl) {
+        const { hostname } = new URL(bookmarkUrl)
+
+        return isChrome()
+          ? `chrome://favicon/size/16@2x/${bookmarkUrl}`
+          : `https://icons.duckduckgo.com/ip3/${hostname}.ico`
+      },
     },
     shortcuts: {
       down () {
@@ -193,11 +228,11 @@
   >
     <div :class="$style.queryContainer">
       <input
+        ref="queryInput"
         v-model="query"
         type="search"
         :class="$style.queryInput"
         placeholder="Search…"
-        autofocus
         spellcheck="false"
         @input="queryChanged"
       >
@@ -221,7 +256,6 @@
     </p>
 
     <ol
-      v-if="results.length"
       ref="resultList"
       :class="$style.resultList"
     >
@@ -243,10 +277,11 @@
             v-if="result.type === resultTypes.BOOKMARKLET || result.type === resultTypes.SNIPPET"
             :class="$style.faviconAction"
           />
+
           <img
-            v-else-if="isChrome"
+            v-else-if="hasFavicon"
             :class="$style.faviconBookmark"
-            :src="`chrome://favicon/size/16@2x/${result.bookmark.url}`"
+            :src="getFaviconSource(result.bookmark.url)"
             alt=""
           >
 
@@ -346,6 +381,7 @@
 
   .favicon {
     width: 20px;
+    height: 20px;
     margin-right: 8px;
   }
 
