@@ -11,7 +11,7 @@
   import 'codemirror/addon/dialog/dialog.css'
   import 'codemirror/addon/search/searchcursor'
   import 'codemirror/addon/search/search'
-  import 'codemirror/theme/3024-day.css'
+  import 'codemirror/theme/idea.css'
   import 'codemirror/theme/moxer.css'
   import getThemeByOptionOrPreference from '@/lib/getThemeByOptionOrPreference'
   import { getOptions } from '@/lib/options'
@@ -19,7 +19,7 @@
 
   const THEME_MAP = {
     [Themes.DARK]: `moxer`,
-    [Themes.LIGHT]: `3024-day`,
+    [Themes.LIGHT]: `idea`,
   }
 
   export default {
@@ -95,14 +95,5 @@
 
   :global(.CodeMirror) {
     flex-grow: 1;
-  }
-
-  :global(.cm-searching.CodeMirror-selectedtext) {
-    background-color: #ffa;
-    color: #4e4e4e !important;
-  }
-
-  :root[data-theme="light"] :global(.cm-searching.CodeMirror-selectedtext) {
-    color: #4e4e4e !important;
   }
 </style>

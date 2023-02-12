@@ -1,8 +1,9 @@
-# 3.2.0 (2022-11-20)
+# 3.2.0 (2023-02-12)
 
 ## Features
 
 * Firefox: Add option to load favicons from DuckDuckGo
+* Add option to configure theme (Dark, Light or System)
 
 ## Bug Fixes
 
